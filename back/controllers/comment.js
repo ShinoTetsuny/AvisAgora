@@ -3,6 +3,7 @@ const Product = require('../models/product');
 
 // Contrôleur pour créer un commentaire
 exports.createComment = async (req, res) => {
+    console.log(req.body)
     try {
         // Créez le commentaire
         const comment = await Comment.create(req.body);

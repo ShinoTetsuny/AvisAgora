@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/app.page/form_comment.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -38,21 +39,35 @@ class _ProductPageState extends State<ProductPage> {
         title: Text('Product Page'),
       ),
       body: Center(
-        child: productData != null
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+        productData != null
             ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('ID: ${productData!['id']}'),
-                  Text('Name: ${productData!['name']}'),
-                  Text('Description: ${productData!['description']}'),
-                  Text('Image: ${productData!['image']}'),
-                  Text('Rating: ${productData!['rating']}'),
-                  Text('Created At: ${productData!['createdAt']}'),
-                  Text('Updated At: ${productData!['updatedAt']}'),
-                  Text('Category ID: ${productData!['categoryId']}'),
-                ],
-              )
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('ID: ${productData!['id']}'),
+              Text('Name: ${productData!['name']}'),
+              Text('Description: ${productData!['description']}'),
+              Text('Image: ${productData!['image']}'),
+              Text('Rating: ${productData!['rating']}'),
+              Text('Created At: ${productData!['createdAt']}'),
+              Text('Updated At: ${productData!['updatedAt']}'),
+              Text('Category ID: ${productData!['categoryId']}'),
+            ],
+          )
             : CircularProgressIndicator(),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CommentForm(productId: productData!['id'],)),
+            );
+          },
+          child: Text('Comment'),
+        ),
+          ],
+        ),
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:front/app.components/block_category.dart';
-import 'package:front/app.page/create_product.dart';
+import 'package:front/app.components/caroussel.dart';
+import 'package:front/app.page/login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CreateProductPage()),
+                MaterialPageRoute(builder: (context) => LoginPage()),
               );
             },
           ),
@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SearchSection(),
-            // CarousselSection(),
+            CarousselSection(),
             Stest(),
           ],
         ),
@@ -113,37 +113,6 @@ class SearchSection extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class CarousselSection extends StatelessWidget {
-  const CarousselSection({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final List<String> imgList = [
-      'https://via.placeholder.com/600x400/8f8e94/FFFFFF?text=Slide+1',
-      'https://via.placeholder.com/600x400/8e8e8f/FFFFFF?text=Slide+2',
-      'https://via.placeholder.com/600x400/8e8e91/FFFFFF?text=Slide+3',
-    ];
-
-    return CarouselSlider(
-      options: CarouselOptions(
-        height: 400.0,
-        enlargeCenterPage: true,
-        autoPlay: true,
-        aspectRatio: 16 / 9,
-        autoPlayCurve: Curves.fastOutSlowIn,
-        enableInfiniteScroll: true,
-        autoPlayAnimationDuration: Duration(milliseconds: 800),
-        viewportFraction: 0.8,
-      ),
-      items: imgList.map((item) => Container(
-        child: Center(
-          child: Image.network(item, fit: BoxFit.cover, width: 1000),
-        ),
-      )).toList(),
     );
   }
 }

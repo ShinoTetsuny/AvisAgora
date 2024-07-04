@@ -1,47 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:front/app.page/register.dart';
 
-class RegisterPage extends StatelessWidget {
+class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inscription'),
+        title: Text('Login'),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
+            const TextField(
               decoration: InputDecoration(
-                labelText: 'Nom',
+                labelText: 'Username',
               ),
             ),
             SizedBox(height: 16.0),
-            TextField(
+            const TextField(
               decoration: InputDecoration(
-                labelText: 'Prénom',
-              ),
-            ),
-            SizedBox(height: 16.0),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Email',
-              ),
-            ),
-            SizedBox(height: 16.0),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Mot de passe',
+                labelText: 'Password',
               ),
               obscureText: true,
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                // Ajoutez ici la logique pour traiter l'inscription
+                
               },
               child: Text('S\'inscrire'),
+            ),
+            SizedBox(height: 16.0),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RegisterPage()),
+                );
+              },
+              child: Text("Créer un compte"),
             ),
           ],
         ),
