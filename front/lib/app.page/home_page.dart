@@ -4,6 +4,7 @@ import 'package:front/app.components/caroussel.dart';
 import 'package:front/app.page/login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,12 +13,43 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AvisAgora'),
-        centerTitle: true,
         backgroundColor: Color.fromARGB(255, 128, 100, 145),
+        centerTitle: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'AVIS',
+              style: GoogleFonts.firaSans(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(width: 8.0),
+            CircleAvatar(
+              radius: 20,
+              child: Image.asset(
+                'assets/images/loogoo.png',
+                height: 30,
+              ),
+            ),
+            SizedBox(width: 8.0),
+            Text(
+              'AGORA',
+              style: GoogleFonts.firaSans(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.asset('./assets/images/menu.png'),
+          child:
+              Image.asset('assets/images/menu.png'), 
+            
         ),
         actions: [
           IconButton(
@@ -51,7 +83,6 @@ class SearchSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey[200],
       padding: EdgeInsets.fromLTRB(10, 25, 10, 10),
       child: Column(
         children: [
@@ -87,7 +118,7 @@ class SearchSection extends StatelessWidget {
                 width: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(25)),
-                  color: Colors.grey,
+                  color: Colors.white,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey,
@@ -104,7 +135,7 @@ class SearchSection extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.search,
-                    color: Colors.grey[200],
+                    color: Color.fromARGB(255, 128, 100, 145),
                     size: 26,
                   ),
                 ),
@@ -135,11 +166,13 @@ class _StestState extends State<Stest> {
 
   Future<void> fetchCategories() async {
     try {
-      final response = await http.get(Uri.parse("http://192.168.130.237:3000/categorys"));
+      final response =
+          await http.get(Uri.parse("http://192.168.130.237:3000/categorys"));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         setState(() {
-          categories = List<Map<String, dynamic>>.from(data.map((category) => category));
+          categories =
+              List<Map<String, dynamic>>.from(data.map((category) => category));
         });
       } else {
         print('Failed to fetch categories');
@@ -155,7 +188,7 @@ class _StestState extends State<Stest> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, // Adjust the number of columns as needed
+        crossAxisCount: 2, 
         childAspectRatio: 1.5,
       ),
       itemCount: categories.length,

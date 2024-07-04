@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front/app.components/block_product.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductListPage extends StatefulWidget {
   final int categoryId;
@@ -39,10 +40,48 @@ class _ProductListPageState extends State<ProductListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Product List'),
-      ),
+     appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 128, 100, 145),
+        centerTitle: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'AVIS',
+              style: GoogleFonts.firaSans(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(width: 8.0),
+            CircleAvatar(
+              radius: 20,
+              child: Image.asset(
+                'assets/images/loogoo.png',
+                height: 30,
+              ),
+            ),
+            SizedBox(width: 8.0),
+            Text(
+              'AGORA',
+              style: GoogleFonts.firaSans(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child:
+              Image.asset('assets/images/menu.png'), 
+            
+        ),
+     ),
       body: ListView.builder(
+        
         itemCount: productList.length,
         itemBuilder: (context, index) {
           final product = productList[index];

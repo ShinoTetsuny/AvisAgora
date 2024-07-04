@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:google_fonts/google_fonts.dart';
 
 class CreateProductPage extends StatefulWidget {
   @override
@@ -19,7 +20,8 @@ class _CreateProductPageState extends State<CreateProductPage> {
   }
 
   Future<void> fetchCategories() async {
-    final response = await http.get(Uri.parse('http://192.168.130.237:3000/categorys'));
+    final response =
+        await http.get(Uri.parse('http://192.168.130.237:3000/categorys'));
     if (response.statusCode == 200) {
       print(response.body);
       setState(() {
@@ -51,12 +53,57 @@ class _CreateProductPageState extends State<CreateProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Create Product'),
+      
+       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 128, 100, 145),
+        centerTitle: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'AVIS',
+              style: GoogleFonts.firaSans(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(width: 8.0),
+            CircleAvatar(
+              radius: 20,
+              child: Image.asset(
+                'assets/images/loogoo.png',
+                height: 30,
+              ),
+            ),
+            SizedBox(width: 8.0),
+            Text(
+              'AGORA',
+              style: GoogleFonts.firaSans(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+       
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add, color: Colors.green),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CreateProductPage()),
+              );
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DropdownButtonFormField(
               value: null,
@@ -70,7 +117,19 @@ class _CreateProductPageState extends State<CreateProductPage> {
                 // Handle category selection
               },
               decoration: InputDecoration(
-                labelText: 'Category',
+                labelText: 'Categorie',
+                labelStyle: GoogleFonts.firaSans(
+                  textStyle: TextStyle(
+                    fontSize: 16,
+                    color: Color.fromARGB(255, 128, 100, 145),
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 128, 100, 145),
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 16.0),
@@ -81,7 +140,30 @@ class _CreateProductPageState extends State<CreateProductPage> {
                 });
               },
               decoration: InputDecoration(
-                labelText: 'Name',
+                labelText: 'Nom du produit',
+                labelStyle: GoogleFonts.firaSans(
+                  textStyle: TextStyle(
+                    fontSize: 16,
+                    color: Color.fromARGB(255, 128, 100, 145),
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 128, 100, 145),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 128, 100, 145),
+                  ),
+                ),
+              ),
+              style: GoogleFonts.firaSans(
+                textStyle: TextStyle(
+                  color: Color.fromARGB(255, 128, 100, 145),
+                ),
               ),
             ),
             SizedBox(height: 16.0),
@@ -93,13 +175,51 @@ class _CreateProductPageState extends State<CreateProductPage> {
               },
               decoration: InputDecoration(
                 labelText: 'Image',
+                labelStyle: GoogleFonts.firaSans(
+                  textStyle: TextStyle(
+                    fontSize: 16,
+                    color: Color.fromARGB(255, 128, 100, 145),
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 128, 100, 145),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 128, 100, 145),
+                  ),
+                ),
+              ),
+              style: GoogleFonts.firaSans(
+                textStyle: TextStyle(
+                  color: Color.fromARGB(255, 128, 100, 145),
+                ),
               ),
             ),
             SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: createProduct,
-              child: Text('Create'),
-            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: createProduct,
+                child: Text(
+                  'Create',
+                  style: GoogleFonts.firaSans(
+                    textStyle: TextStyle(color: Colors.white),),
+                  
+                ),
+                
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      Color.fromARGB(255, 47, 112, 175), // Updated color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

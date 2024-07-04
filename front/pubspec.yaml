@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  carousel_slider: ^4.2.1 
+    
+
   
 
 
@@ -37,12 +40,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   http: ^1.2.1
-  carousel_slider: ^4.2.1 
   google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+    
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -64,6 +67,7 @@ flutter:
   assets:
     - assets/images/menu.png
     - assets/images/user.png
+    - assets/images/loogoo.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front/app.page/product.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductCard extends StatelessWidget {
   final Map<String, dynamic> product;
@@ -32,8 +33,14 @@ class ProductCard extends StatelessWidget {
                 children: [
                   Text(
                     product['name'],
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.firaSans(textStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Color.fromARGB(255, 	185,	132,	140),
+                    ),
+                    ),
                   ),
+
                   /* SizedBox(height: 5), */
                   /* Text(
                     product['description'],

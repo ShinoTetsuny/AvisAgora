@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front/app.page/form_comment.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductPage extends StatefulWidget {
   final int productId;
