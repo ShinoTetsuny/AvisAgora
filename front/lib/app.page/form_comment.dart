@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:front/app.components/app_bar_all.dart';
 import 'package:http/http.dart' as http;
 
 class CommentForm extends StatefulWidget {
@@ -19,9 +20,7 @@ class _CommentFormState extends State<CommentForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Comment Form'),
-      ),
+      appBar: CustomAppBar(),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -37,7 +36,6 @@ class _CommentFormState extends State<CommentForm> {
               value: _rating,
               onChanged: (value) {
                 setState(() {
-                  print(value.runtimeType);
                   _rating = value!;
                 });
               },
@@ -64,13 +62,11 @@ class _CommentFormState extends State<CommentForm> {
   void _submitComment() async {
     final comment = _commentController.text;
     const url = 'http://192.168.130.237:3000/comments/';
-    print(widget.productId.runtimeType);
     final Map<String, dynamic> body = {
       'comment': comment,
       'rating': _rating,
       'productId': widget.productId,
     };
-    print("bute");
     final response = await http.post(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json'},

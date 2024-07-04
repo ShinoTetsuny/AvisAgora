@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:front/app.components/app_bar_all.dart';
 import 'package:front/app.components/block_category.dart';
 import 'package:front/app.components/caroussel.dart';
-import 'package:front/app.page/login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,63 +12,33 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 128, 100, 145),
-        centerTitle: true,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'AVIS',
-              style: GoogleFonts.firaSans(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(width: 8.0),
-            CircleAvatar(
-              radius: 20,
-              child: Image.asset(
-                'assets/images/loogoo.png',
-                height: 30,
-              ),
-            ),
-            SizedBox(width: 8.0),
-            Text(
-              'AGORA',
-              style: GoogleFonts.firaSans(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child:
-              Image.asset('assets/images/menu.png'), 
-            
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add, color: Colors.green),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-              );
-            },
-          ),
-        ],
-      ),
-      body: const SingleChildScrollView(
+      appBar: CustomAppBar(),
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SearchSection(),
+            Center(
+              child: Text(
+              "Le Top 5 de la semaine",
+              style: GoogleFonts.firaSans(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 79, 72, 175),
+              ),
+              ),
+            ),
             CarousselSection(),
+            Center(
+              child: Text(
+              "Explorez nos catégories",
+              style: GoogleFonts.firaSans(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 79, 72, 175),
+              ),
+              ),
+            ),
             Stest(),
           ],
         ),

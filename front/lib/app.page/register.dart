@@ -1,44 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:front/app.components/app_bar_all.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 128, 100, 145),
-        centerTitle: true,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'AVIS',
-              style: GoogleFonts.firaSans(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(width: 8.0),
-            CircleAvatar(
-              radius: 20,
-              child: Image.asset(
-                'assets/images/loogoo.png',
-                height: 30,
-              ),
-            ),
-            SizedBox(width: 8.0),
-            Text(
-              'AGORA',
-              style: GoogleFonts.firaSans(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(

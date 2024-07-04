@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/app.components/app_bar_all.dart';
 import 'package:front/app.page/form_comment.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -36,37 +37,43 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Product Page'),
-      ),
+      appBar: CustomAppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-        productData != null
-            ? Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('ID: ${productData!['id']}'),
-              Text('Name: ${productData!['name']}'),
-              Text('Description: ${productData!['description']}'),
-              Text('Image: ${productData!['image']}'),
-              Text('Rating: ${productData!['rating']}'),
-              Text('Created At: ${productData!['createdAt']}'),
-              Text('Updated At: ${productData!['updatedAt']}'),
-              Text('Category ID: ${productData!['categoryId']}'),
-            ],
-          )
-            : CircularProgressIndicator(),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => CommentForm(productId: productData!['id'],)),
-            );
-          },
-          child: Text('Comment'),
-        ),
+            productData != null
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('${productData!['name']}'),
+                      SizedBox(height: 5),
+                      Image.network(
+                        productData!['image'],
+                        width: 200,
+                        height: 400,
+                      ),
+                      SizedBox(height: 20),
+                      Text('Rating: ${productData!['rating'] ?? "Pas encore Noté"}'),
+                      SizedBox(height: 20),
+                      Text('${productData!['description'] ?? "Pas de Description"}'),
+                      SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CommentForm(
+                                productId: productData!['id'],
+                              ),
+                            ),
+                          );
+                        },
+                        child: Text('Avis'),
+                      ),
+                    ],
+                  )
+                : CircularProgressIndicator(),
           ],
         ),
       ),

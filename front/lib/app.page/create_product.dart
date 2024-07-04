@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:front/app.components/app_bar_all.dart';
+import 'package:front/app.page/home_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +25,6 @@ class _CreateProductPageState extends State<CreateProductPage> {
     final response =
         await http.get(Uri.parse('http://192.168.130.237:3000/categorys'));
     if (response.statusCode == 200) {
-      print(response.body);
       setState(() {
         categories = jsonDecode(response.body);
       });
@@ -44,7 +45,10 @@ class _CreateProductPageState extends State<CreateProductPage> {
       }),
     );
     if (response.statusCode == 201) {
-      // Product created successfully
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
     } else {
       // Handle error
     }
@@ -52,55 +56,9 @@ class _CreateProductPageState extends State<CreateProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
-       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 128, 100, 145),
-        centerTitle: true,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'AVIS',
-              style: GoogleFonts.firaSans(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(width: 8.0),
-            CircleAvatar(
-              radius: 20,
-              child: Image.asset(
-                'assets/images/loogoo.png',
-                height: 30,
-              ),
-            ),
-            SizedBox(width: 8.0),
-            Text(
-              'AGORA',
-              style: GoogleFonts.firaSans(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-       
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add, color: Colors.green),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CreateProductPage()),
-              );
-            },
-          ),
-        ],
-      ),
-      body: Padding(
+    return Scaffold(  
+       appBar: CustomAppBar(),
+       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
