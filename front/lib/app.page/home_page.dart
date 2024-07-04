@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:front/app.components/block_category.dart';
+import 'package:front/app.page/create_product.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-  
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,22 +17,27 @@ class HomePage extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 128, 100, 145),
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.asset('assets/images/menu.png'),
+          child: Image.asset('./assets/images/menu.png'),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/images/user.png'),
+          IconButton(
+            icon: Icon(Icons.add, color: Colors.green),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CreateProductPage()),
+              );
+            },
           ),
         ],
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SearchSection(),
-            CarousselSection(),
-            CategoriesSection(),
+            // CarousselSection(),
+            Stest(),
           ],
         ),
       ),
@@ -55,7 +63,7 @@ class SearchSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.grey,
                         blurRadius: 5,
@@ -64,7 +72,7 @@ class SearchSection extends StatelessWidget {
                     ],
                   ),
                   height: 50,
-                  child: TextField(
+                  child: const TextField(
                     decoration: InputDecoration(
                       hintText: 'Rechercher',
                       contentPadding: EdgeInsets.all(10),
@@ -110,6 +118,8 @@ class SearchSection extends StatelessWidget {
 }
 
 class CarousselSection extends StatelessWidget {
+  const CarousselSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     final List<String> imgList = [
@@ -137,42 +147,52 @@ class CarousselSection extends StatelessWidget {
     );
   }
 }
-//categories section
-class CategoriesSection extends StatelessWidget {
-  final List categories = [
-    'Films',
-    'Séries',
-    'Livres',
-    'Bandes Dessinées',
-    'Jeux Vidéos',
-  ];
+
+class Stest extends StatefulWidget {
+  const Stest({super.key});
+
+  @override
+  State<Stest> createState() => _StestState();
+}
+
+class _StestState extends State<Stest> {
+  List<Map<String, dynamic>> categories = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCategories();
+  }
+
+  Future<void> fetchCategories() async {
+    try {
+      final response = await http.get(Uri.parse("http://192.168.130.237:3000/categorys"));
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        setState(() {
+          categories = List<Map<String, dynamic>>.from(data.map((category) => category));
+        });
+      } else {
+        print('Failed to fetch categories');
+      }
+    } catch (error) {
+      print('Error fetching categories: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 1,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2, // Adjust the number of columns as needed
         childAspectRatio: 1.5,
       ),
       itemCount: categories.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Card(
-          margin: EdgeInsets.all(10),
-          elevation: 5,
-          child: InkWell(
-            onTap: () {
-              print('Catégorie sélectionnée: ${categories[index]}');
-            },
-            child: Center(
-              child: Text(
-                categories[index],
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-        );
+      itemBuilder: (context, index) {
+        final category = categories[index];
+        return CategoryCard(category: category);
       },
     );
   }
